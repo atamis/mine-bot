@@ -1,36 +1,28 @@
 # mine-bot
 
-FIXME: description
+A Discord bot for generating minesweeper boards. Depends on
+[`atamis-discord.clj`](https://github.com/atamis/discord.clj), a forked variant
+of [`discord.clj`](https://github.com/gizmo385/discord.clj).
 
 ## Installation
 
-Download from http://example.com/FIXME.
+Clone this repo.
 
 ## Usage
 
-FIXME: explanation
+Copy `data/settings/settings.json.template` to a new file and update it with
+your token and name.
 
-    $ java -jar mine-bot-0.1.0-standalone.jar [args]
+    $ lein run
 
 ## Options
 
-FIXME: listing of options this app accepts.
-
-## Examples
-
-...
-
-### Bugs
-
-...
-
-### Any Other Sections
-### That You Think
-### Might be Useful
+See `data/settings/settings.json.template` for all availablle configuration
+options, except for the prefix, which this bot ignores.
 
 ## License
 
-Copyright © 2019 FIXME
+Copyright © 2019 Andrew Amis
 
 This program and the accompanying materials are made available under the
 terms of the Eclipse Public License 2.0 which is available at
