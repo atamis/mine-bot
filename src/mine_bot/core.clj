@@ -20,6 +20,7 @@
 (defn minesweeper-extension
   [client message]
   (let [[x y mines] (->> (clojure.string/split (:content message) #" ")
+                         (filter #(not (= "" %)))
                          (map #(Integer/parseInt %)))
         x (or x 10)
         y (or y 10)
