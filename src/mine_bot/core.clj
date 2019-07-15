@@ -14,33 +14,32 @@
 
 (defn respond-mention
   [message]
-  (str "<" (:mention (:author message)) ">")
-  )
+  (str "<" (:mention (:author message)) ">"))
 
-(defn minesweeper-extension
+(bot/defcommand mine
   [client message]
+  "Generates and posts a minesweeper board, takes \"x y\" coords, optional third argument for number of mines. "
+  (prn message)
   (let [[x y mines] (->> (clojure.string/split (:content message) #" ")
                          (filter #(not (= "" %)))
                          (map #(Integer/parseInt %)))
         x (or x 10)
         y (or y 10)
         mines (or mines 10)
-        string (minesweeper/minesweeper-render x y mines)
-        ]
+        string (minesweeper/minesweeper-render x y mines)]
     (cond
 
       (< 2000 (count string)) (bot/say (str (respond-mention message) ", board too large."))
       (< 197 (* x y)) (bot/say (str (respond-mention message) ", maximum 197 spoilers per post, board too large."))
-      :else (bot/say (minesweeper/minesweeper-render x y mines))
-      )
-    ))
+      :else (bot/say (minesweeper/minesweeper-render x y mines)))))
+
+(bot/defcommand hello
+  [client message]
+  (bot/say (str "Hello, <" (:mention (:author message)) ">")))
+
+(bot/defhandler debug-handler [prefix client message]
+  (prn prefix message))
 
 (defn -main
-  "Discord bot to generate minesweeper boards."
   [& args]
-  (println "Launching...")
-  (bot/with-extensions
-    "MinesweeperBot" "^"
-    :hello (fn [client message] (println "Received" message)
-             (bot/say (str "Hello, <" (:mention (:author message)) ">")))
-    :mine minesweeper-extension))
+  (bot/start))
