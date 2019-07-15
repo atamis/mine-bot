@@ -1,7 +1,9 @@
 (ns mine-bot.core
   (:require [discord.bot :as bot]
             [discord.http :as http]
-            [mine-bot.minesweeper :as minesweeper])
+            [mine-bot.minesweeper :as minesweeper]
+            [taoensso.timbre :as log])
+
   (:gen-class))
 
 (comment
@@ -28,7 +30,6 @@
         mines (or mines 10)
         string (minesweeper/minesweeper-render x y mines)]
     (cond
-
       (< 2000 (count string)) (bot/say (str (respond-mention message) ", board too large."))
       (< 197 (* x y)) (bot/say (str (respond-mention message) ", maximum 197 spoilers per post, board too large."))
       :else (bot/say (minesweeper/minesweeper-render x y mines)))))
@@ -39,7 +40,7 @@
   (bot/say (str "Hello, <" (:mention (:author message)) ">")))
 
 (bot/defhandler debug-handler [prefix client message]
-  (prn prefix message))
+  (log/info prefix message))
 
 (defn -main
   [& args]
