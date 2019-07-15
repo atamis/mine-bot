@@ -35,6 +35,7 @@
 
 (bot/defcommand hello
   [client message]
+  "Say hello"
   (bot/say (str "Hello, <" (:mention (:author message)) ">")))
 
 (bot/defhandler debug-handler [prefix client message]
