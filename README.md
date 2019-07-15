@@ -1,8 +1,6 @@
 # mine-bot
 
-A Discord bot for generating minesweeper boards. Depends on
-[`atamis-discord.clj`](https://github.com/atamis/discord.clj), a forked variant
-of [`discord.clj`](https://github.com/gizmo385/discord.clj).
+A Discord bot for generating minesweeper boards.
 
 ## Installation
 
@@ -19,6 +17,18 @@ your token and name.
 
 See `data/settings/settings.json.template` for all availablle configuration
 options, except for the prefix, which this bot ignores.
+
+## Deployment
+
+    $ sudo docker build .
+
+After tagging and pushing the image, edit deploy.yml with the right image name,
+then
+
+    $ kubectl apply -f deploy.yml
+
+Note that the `uberjar` feature of lein is currently non-functional due to the
+reliace of the bot framework on configuration files.
 
 ## License
 
