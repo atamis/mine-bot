@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mine-bot
+  labels:
+    app: mine-bot
+    tier: backend
+    version: v1
+spec:
+  selector:
+    matchLabels:
+      app: mine-bot
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: mine-bot
+    spec:
+      containers:
+        - name: mine-bot
+          image: 192.168.1.10:32000/mine-bot:latest
